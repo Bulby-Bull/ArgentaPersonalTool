@@ -60,34 +60,6 @@ filtered_incomes.insert(2, "Month", dates["Month"])
 filtered_incomes = filtered_incomes.sort_values(by=["Date comptable"], ascending=True)
 filtered_incomes = filtered_incomes.reset_index(drop=True)
 
-#%%
-'''#%% Save expenses in the last row of the dashboard document (.xlsx)
-
-# Load file & open the correct sheet
-path = 'DepensesSalaire.xlsx'
-wb = load_workbook(path)
-ws = wb["Depenses"]
-
-# Recover the max_row when open the file (last expense in the dashboard)
-last_row = ws.max_row
-
-# Take the last date of the dashboard to only add new expenses
-last_date = ws.cell(row=ws.max_row+1,column=1).value
-# test = last_date >= filtered_expenses["Date comptable"][0]
-
-step = 1
-
-# Iterate on each rows pf the dataframe (new expenses)
-for index, each_expense in filtered_expenses.iterrows():
-    # Iterate on each column cell to add new expense from the dataframe only if new expense
-    if each_expense[0] > last_date:
-        for element in range(1,8):
-            ws.cell(row=last_row+step, column=element).value = each_expense[element-1]
-        step += 1
-
-# Save the xlsx
-# wb.save('DepensesSalaire.xlsx')'''
-
 #%% Save expenses in the last row of the dashboard document (.xlsx)
 
 # Load file & open the correct sheet
@@ -133,7 +105,7 @@ for index, each_expense in filtered_expenses.iterrows():
     step += 1
 
 # Save the xlsx
-# wb.save(path)
+wb.save(path)
 
 #%% Save incomes in the last row of the dashboard document (.xlsx) BON
 
@@ -181,27 +153,4 @@ for index, each_income in filtered_incomes.iterrows():
     step += 1
 
 # Save the xlsx
-# wb.save(path)
-#%%    
-
-'''#%% Save incomes in the last row of the dashboard document (.xlsx)
-
- # Load file and open the correct sheet
-path = 'DepensesSalaire.xlsx'
-wb = load_workbook(path)
-ws2 = wb["Incomes"]
-
-# Recover the max_row when open the file (last income in the dashboard)
-last_row = ws2.max_row
-
-step = 1
-
-# Iterate on each rows of the dataframe (new incomes)
-for index, each_income in filtered_incomes.iterrows():
-    # Iterate on each column cell to add new incomes from the dataframe only if new income
-    for element in range(1,8):
-        ws2.cell(row=last_row+step, column=element).value = each_income[element-1]
-    step += 1
-
-# Save the xlsx
-wb.save('DepensesSalaire.xlsx')'''
+wb.save(path)
